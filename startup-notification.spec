@@ -4,7 +4,7 @@
 #
 Name     : startup-notification
 Version  : 0.12
-Release  : 15
+Release  : 16
 URL      : http://www.freedesktop.org/software/startup-notification/releases/startup-notification-0.12.tar.gz
 Source0  : http://www.freedesktop.org/software/startup-notification/releases/startup-notification-0.12.tar.gz
 Summary  : Monitor and display application startup
