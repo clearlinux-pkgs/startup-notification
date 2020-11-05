@@ -4,10 +4,10 @@
 #
 Name     : startup-notification
 Version  : 0.12
-Release  : 16
+Release  : 17
 URL      : http://www.freedesktop.org/software/startup-notification/releases/startup-notification-0.12.tar.gz
 Source0  : http://www.freedesktop.org/software/startup-notification/releases/startup-notification-0.12.tar.gz
-Summary  : Monitor and display application startup
+Summary  : Startup notification library
 Group    : Development/Tools
 License  : LGPL-2.0
 Requires: startup-notification-lib = %{version}-%{release}
@@ -50,32 +50,34 @@ license components for the startup-notification package.
 
 %prep
 %setup -q -n startup-notification-0.12
+cd %{_builddir}/startup-notification-0.12
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
-export LANG=C
-export SOURCE_DATE_EPOCH=1557099606
+export LANG=C.UTF-8
+export SOURCE_DATE_EPOCH=1604601424
+export GCC_IGNORE_WERROR=1
 export CFLAGS="$CFLAGS -fno-lto "
-export FCFLAGS="$CFLAGS -fno-lto "
-export FFLAGS="$CFLAGS -fno-lto "
+export FCFLAGS="$FFLAGS -fno-lto "
+export FFLAGS="$FFLAGS -fno-lto "
 export CXXFLAGS="$CXXFLAGS -fno-lto "
 %configure --disable-static
 make  %{?_smp_mflags}
 
 %check
-export LANG=C
+export LANG=C.UTF-8
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
-make VERBOSE=1 V=1 %{?_smp_mflags} check
+make %{?_smp_mflags} check
 
 %install
-export SOURCE_DATE_EPOCH=1557099606
+export SOURCE_DATE_EPOCH=1604601424
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/startup-notification
-cp COPYING %{buildroot}/usr/share/package-licenses/startup-notification/COPYING
+cp %{_builddir}/startup-notification-0.12/COPYING %{buildroot}/usr/share/package-licenses/startup-notification/433183a061c599ed2443c625b3129d141dc1c290
 %make_install
 
 %files
@@ -99,4 +101,4 @@ cp COPYING %{buildroot}/usr/share/package-licenses/startup-notification/COPYING
 
 %files license
 %defattr(0644,root,root,0755)
-/usr/share/package-licenses/startup-notification/COPYING
+/usr/share/package-licenses/startup-notification/433183a061c599ed2443c625b3129d141dc1c290
